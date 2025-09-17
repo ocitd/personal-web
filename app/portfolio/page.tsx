@@ -19,7 +19,7 @@ export default function PortfolioPage() {
             Portfolio
           </h1>
           <p className="mt-3 text-neutral-600">
-            Check out some of my latest projects. (soon insyaallah)
+            Check out some of my latest projects.
           </p>
         </div>
         <div className="mt-10 space-y-10">
@@ -41,23 +41,33 @@ export default function PortfolioPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects
-              .filter((p) => active === "All" || p.category === active)
+              .filter((p) => active === "All" || p.category.includes(active))
               .map((p, i) => (
                 <motion.div
                   key={i}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-neutral-900 rounded-xl overflow-hidden shadow-lg hover:shadow-orange-400/40 transition"
+                  className="rounded-xl overflow-hidden shadow-lg hover:shadow-orange-400/40 transition"
                 >
                   <img
                     src={p.img}
                     alt={p.title}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-[400px] object-cover"
                   />
-                  <div className="flex justify-between items-center px-4 py-3 bg-white">
+                  <div className="px-4 py-3 bg-white">
+                    {/* Title */}
                     <p className="text-neutral-800 font-medium">{p.title}</p>
-                    <span className="text-orange-500 font-semibold">
-                      {p.category}
-                    </span>
+
+                    {/* Categories */}
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {p.category.map((cat) => (
+                        <span
+                          key={cat}
+                          className="bg-orange-100 text-orange-600 text-xs font-semibold px-2 py-1 rounded"
+                        >
+                          {cat}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               ))}

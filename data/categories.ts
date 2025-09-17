@@ -1,7 +1,3 @@
-export const categories: string[] = [
-  "All",
-  "Website Design",
-  "App Mobile Design",
-  "App Desktop",
-  "Branding",
-];
+import { projects } from "./projects";
+
+export const categories = ["All", ...new Set(projects.flatMap((p) => p.category))];
