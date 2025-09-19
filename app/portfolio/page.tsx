@@ -1,12 +1,29 @@
 "use client";
 
-import { categories } from "@/data/categories";
-import { projects } from "@/data/projects";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function PortfolioPage() {
   const [active, setActive] = useState("All");
+  const [categories, setCategories] = useState<string[]>(["All"]);
+  const [projects, setProjects] = useState<any[]>([]);
+
+  // ambil data dari server
+  useEffect(() => {
+    fetch("/api/projects")
+      .then((res) => res.json())
+      .then((data) => {
+        setProjects(data);
+        setCategories([
+          "All",
+          ...new Set(data.flatMap((p: any) => p.category) as string[]),
+        ]);
+      });
+  }, []);
+
+  const filtered = projects.filter(
+    (p) => active === "All" || p.category.includes(active)
+  );
 
   return (
     <main className="min-h-screen text-neutral-800">
@@ -31,8 +48,8 @@ export default function PortfolioPage() {
                 whileHover={{ scale: 1.1 }}
                 className={`px-5 py-2 rounded-md font-medium transition-colors ${
                   active === cat
-                    ? "bg-orange-500 text-white"
-                    : "bg-white/10 hover:bg-white/20"
+                    ? "bg-orange-500 text-white shadow-md" // aktif = solid
+                    : "bg-orange-100 text-orange-600 hover:bg-orange-200" // non aktif = lebih soft
                 }`}
               >
                 {cat}
@@ -42,6 +59,7 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects
               .filter((p) => active === "All" || p.category.includes(active))
+              .slice(0, 6)
               .map((p, i) => (
                 <motion.div
                   key={i}
@@ -54,12 +72,9 @@ export default function PortfolioPage() {
                     className="w-full h-[400px] object-cover"
                   />
                   <div className="px-4 py-3 bg-white">
-                    {/* Title */}
                     <p className="text-neutral-800 font-medium">{p.title}</p>
-
-                    {/* Categories */}
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {p.category.map((cat) => (
+                      {p.category.map((cat: string) => (
                         <span
                           key={cat}
                           className="bg-orange-100 text-orange-600 text-xs font-semibold px-2 py-1 rounded"
