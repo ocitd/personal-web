@@ -6,7 +6,14 @@ import React, { useEffect, useState } from "react";
 export default function PortfolioPage() {
   const [active, setActive] = useState("All");
   const [categories, setCategories] = useState<string[]>(["All"]);
-  const [projects, setProjects] = useState<any[]>([]);
+  type Project = {
+    img: string;
+    title: string;
+    category: string[];
+    // add other fields if needed
+  };
+
+  const [projects, setProjects] = useState<Project[]>([]);
 
   // ambil data dari server
   useEffect(() => {
@@ -16,7 +23,7 @@ export default function PortfolioPage() {
         setProjects(data);
         setCategories([
           "All",
-          ...new Set(data.flatMap((p: any) => p.category) as string[]),
+          ...new Set(data.flatMap((p: Project) => p.category) as string[]),
         ]);
       });
   }, []);

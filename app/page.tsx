@@ -7,7 +7,14 @@ import Contactform from "@/components/contactme";
 export default function Homepage() {
   const [active, setActive] = useState("All");
   const [categories, setCategories] = useState<string[]>(["All"]);
-  const [projects, setProjects] = useState<any[]>([]);
+  type Project = {
+    id: number;
+    title: string;
+    category: string[];
+    img: string;
+  };
+
+  const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
     fetch("/api/projects")
@@ -16,7 +23,7 @@ export default function Homepage() {
         setProjects(data);
         setCategories([
           "All",
-          ...new Set(data.flatMap((p: any) => p.category) as string[]),
+          ...new Set(data.flatMap((p: Project) => p.category) as string[]),
         ]);
       });
   }, []);
