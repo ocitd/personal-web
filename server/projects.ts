@@ -3,6 +3,7 @@
 import { db } from "@/db/drizzle"
 import { data } from "@/db/schema"
 import { eq } from "drizzle-orm"
+import { utapi } from "./uploadthing"
 
 // =====================
 // CREATE DATA
@@ -64,9 +65,10 @@ export async function updateData(
 // =====================
 // DELETE DATA
 // =====================
-export async function deleteData(id: string) {
+export async function deleteData(id: string, img: string) {
   try {
     await db.delete(data).where(eq(data.id, id))
+    await utapi.deleteFiles([img]) // 🟢 hapus file di UploadThing
     return { success: true }
   } catch (error) {
     console.error(error)

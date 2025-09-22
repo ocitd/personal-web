@@ -47,7 +47,7 @@ export default async function DataTable() {
             <TableCell className="text-right">
               {/* Tombol Edit */}
               <Dialog modal={false}>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                   <Button variant="ghost">
                     <Pencil className="size-4" />
                   </Button>
@@ -61,7 +61,7 @@ export default async function DataTable() {
               </Dialog>
 
               {/* Tombol Delete */}
-              <DeleteDataButton dataId={item.id} />
+              <DeleteDataButton dataId={item.id} img={item.img} />
             </TableCell>
           </TableRow>
         ))}

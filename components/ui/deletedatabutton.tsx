@@ -18,9 +18,10 @@ import { deleteData } from "@/server/projects";
 
 type DeleteDataButtonProps = {
   dataId: string;
+  img: string;
 };
 
-export default function DeleteDataButton({ dataId }: DeleteDataButtonProps) {
+export default function DeleteDataButton({ dataId, img }: DeleteDataButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function DeleteDataButton({ dataId }: DeleteDataButtonProps) {
   const handleDelete = async () => {
     try {
       setIsLoading(true);
-      await deleteData(dataId); // 🟢 panggil server action
+      await deleteData(dataId, img); // 🟢 panggil server action
       toast.success("✅ Data berhasil dihapus");
       setIsOpen(false); // tutup dialog
       router.refresh(); // refresh halaman
