@@ -183,7 +183,7 @@ export default function Homepage() {
               flawlessly...
             </p>
             <a
-              href="/cv-rasyid-abqari.pdf"
+              href="/Rasyid-Abqari-Hasibuan-CV.pdf"
               className="mt-6 px-6 py-3 bg-gradient-to-r from-orange-500 to-pink-500 hover:opacity-90 text-white font-semibold rounded-lg flex items-center gap-2 w-fit"
               download
             >
