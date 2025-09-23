@@ -83,7 +83,7 @@ export default function Homepage() {
                   Hire Me
                 </a>
                 <a
-                  href="/cv-rasyid-abqari.pdf"
+                  href="/Rasyid-Abqari-Hasibuan-CV.pdf"
                   download
                   className="px-5 h-11 rounded-2xl border items-center flex border-neutral-300 bg-white hover:bg-neutral-100 transition shadow-sm"
                 >
