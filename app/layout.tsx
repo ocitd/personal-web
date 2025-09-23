@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Rasyid Abqari Hasibuan | Official Website",
   description:
-    "Website resmi Rasyid Abqari Hasibuan, profil, karya, dan informasi terbaru.",
+    "Rasyid Abqari Hasibuan's official website, profile, works, and latest information.",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-32x32.png",
