@@ -1,5 +1,6 @@
 "use client";
 
+import { sendEmail } from "@/server/sendEmail";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -19,7 +20,9 @@ export default function ContactSection() {
     "w-full mt-1 px-4 py-2 rounded-lg bg-neutral-800 text-neutral-200 placeholder-neutral-500 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-orange-500";
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
@@ -29,13 +32,8 @@ export default function ContactSection() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (res.ok) {
+      const res = await sendEmail(formData);
+      if (res.success) {
         setStatus("success");
         setFormData({
           name: "",
