@@ -1,7 +1,7 @@
-import { createAuthClient } from "better-auth/react"
+import { createAuthClient } from "better-auth/react";
+
 export const authClient = createAuthClient({
-    /** The base URL of the server (optional if you're using the same domain) */
-    baseURL: "https://rasyidabqarihasibuan.my.id"
-    // baseURL: "http://localhost:3000"
-})
-export const { signIn, signUp, useSession } = createAuthClient()
+    baseURL: process.env.BASE_URL! // Optional if the API base URL matches the frontend
+});
+
+export const { signIn, signOut, useSession } = authClient;

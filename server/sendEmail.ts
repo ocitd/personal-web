@@ -7,10 +7,11 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function sendEmail(formData: {
   name: string;
   email: string;
-  phone: string;
+  number: string;
   service: string;
   timeline: string;
-  details: string;
+  message: string;
+  company: string;
 }) {
   try {
     await resend.emails.send({
@@ -21,10 +22,11 @@ export async function sendEmail(formData: {
         <h2>New Contact Request</h2>
         <p><b>Name:</b> ${formData.name}</p>
         <p><b>Email:</b> ${formData.email}</p>
-        <p><b>Phone:</b> ${formData.phone}</p>
+        <p><b>Phone:</b> ${formData.number}</p>
         <p><b>Service:</b> ${formData.service}</p>
         <p><b>Timeline:</b> ${formData.timeline}</p>
-        <p><b>Details:</b> ${formData.details}</p>
+        <p><b>Details:</b> ${formData.message}</p>
+        <p><b>Company:</b> ${formData.company}</p>
       `,
     });
 

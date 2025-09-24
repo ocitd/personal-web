@@ -2,7 +2,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { servicesData } from "@/data/services";
-import Contactform from "@/components/contactme";
+// import LogoCloud from "@/components/logo-cloud";
+import ContactSection from "@/components/contact";
 
 export default function Homepage() {
   const [active, setActive] = useState("All");
@@ -202,7 +203,7 @@ export default function Homepage() {
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
             Portfolio
           </h2>
-          <p className="mt-3 text-neutral-600">
+          <p className="mt-3 text-neutral-400">
             Check out some of my latest projects.
           </p>
         </div>
@@ -265,8 +266,24 @@ export default function Homepage() {
         </div>
       </section>
 
+      {/* LOGO CLOUD */}
+      {/* <section
+        id="CLIENTS"
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
+      >
+        <div className="text-center max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+            Happy Clients
+          </h2>
+          <p className="mt-3 text-neutral-400">
+            I've had the pleasure of working with a diverse range of companies, from startups to established brands.
+          </p>
+        </div>
+        <LogoCloud />
+      </section> */}
+
       {/* CONTACT */}
-      <Contactform />
+      <ContactSection />
     </div>
   );
 }
