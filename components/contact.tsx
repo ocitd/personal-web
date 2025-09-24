@@ -82,7 +82,7 @@ export default function ContactSection() {
         <Card className="mx-auto mt-12 max-w-lg p-8 shadow-md sm:p-16">
           <div>
             <h2 className="text-xl font-semibold">
-              Let's get you to the right place
+              Let&apos;s get you to the right place
             </h2>
             <p className="mt-4 text-sm">
               Reach out to our sales team! We’re eager to learn more about how
