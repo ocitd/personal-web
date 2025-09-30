@@ -14,6 +14,7 @@ import {
 import DataTable from "@/components/data-table";
 import { UserPlus } from "lucide-react";
 import LogOut from "@/components/logout";
+import { SignupForm } from "@/components/forms/signup-form";
 
 export default async function ServerComponent() {
   const session = await auth.api.getSession({
@@ -51,6 +52,7 @@ export default async function ServerComponent() {
 
       {/* 🟢 Table list user */}
       <DataTable />
+      <SignupForm />
       <LogOut />
     </div>
   );
