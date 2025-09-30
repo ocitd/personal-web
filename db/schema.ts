@@ -9,6 +9,15 @@ export const data = pgTable("data", {
   updatedAt: timestamp("updated_at")
 });
 
+export const certificates = pgTable("certificates", {
+  id: text("id").primaryKey(),
+  title: text("title").notNull(),
+  certificate: text("certificate").notNull(),
+  provider: text("provider").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
+});
+
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
