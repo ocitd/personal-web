@@ -78,14 +78,14 @@ export async function updateCertificate(
 // =====================
 // DELETE CERTIFICATE
 // =====================
-export async function deleteCertificate(id: string, certificate: string) {
+export async function deleteCertificate(id: string, img: string) {
   try {
     await db.delete(certificates).where(eq(certificates.id, id));
 
     // Kalau kamu pakai UploadThing untuk simpan sertifikat (misalnya gambar/pdf)
     // maka hapus juga file-nya di server
-    if (certificate) {
-      await utapi.deleteFiles([certificate]);
+    if (img) {
+      await utapi.deleteFiles([img]);
     }
 
     return { success: true };

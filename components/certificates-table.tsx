@@ -75,7 +75,7 @@ export default async function CertificatesTable() {
                 </Dialog>
 
                 {/* Tombol Delete */}
-                <DeleteCertificateButton certificateId={item.id} />
+                <DeleteCertificateButton certificateId={item.id} img={item.certificate} />
               </TableCell>
             </TableRow>
           ))

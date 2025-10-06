@@ -18,10 +18,11 @@ import { deleteCertificate } from "@/server/certificates";
 
 type DeleteCertificateButtonProps = {
   certificateId: string;
+  img: string;
 };
 
 export default function DeleteCertificateButton({
-  certificateId,
+  certificateId, img
 }: DeleteCertificateButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function DeleteCertificateButton({
   const handleDelete = async () => {
     try {
       setIsLoading(true);
-      await deleteCertificate(certificateId); // panggil server action
+      await deleteCertificate(certificateId, img); // panggil server action
       toast.success("✅ Sertifikat berhasil dihapus");
       setIsOpen(false);
       router.refresh();
