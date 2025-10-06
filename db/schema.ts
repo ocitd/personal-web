@@ -82,3 +82,5 @@ export type User = typeof user.$inferSelect;
 
 // Ekspor skema untuk fitur session, verifikasi email, serta lupa password
 export const schema = { user, session, account, verification };
+export type Certificate = typeof certificates.$inferSelect;
+export type NewCertificate = typeof certificates.$inferInsert;

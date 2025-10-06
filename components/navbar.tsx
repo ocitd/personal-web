@@ -13,6 +13,7 @@ export default function Navbar() {
     { href: "/features", label: "Features" },
     { href: "/contact", label: "Contact" },
     { href: "/portfolio", label: "Portfolio" },
+    { href: "/certificates", label: "Certificates" },
   ];
 
   // Efek scroll

@@ -11,10 +11,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import DataTable from "@/components/data-table";
+import DataTable from "@/components/projects-table";
 import { UserPlus } from "lucide-react";
 import LogOut from "@/components/logout";
 import { SignupForm } from "@/components/forms/signup-form";
+import CertificateForm from "@/components/forms/certificate-form";
+import CertificatesTable from "@/components/certificates-table";
 
 export default async function ServerComponent() {
   const session = await auth.api.getSession({
@@ -52,6 +54,30 @@ export default async function ServerComponent() {
 
       {/* 🟢 Table list user */}
       <DataTable />
+
+      
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="flex gap-2">
+            <UserPlus className="size-4" />
+            Add Certificate
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Certificate</DialogTitle>
+            <DialogDescription>
+              make sure the data is correct ✅
+            </DialogDescription>
+          </DialogHeader>
+
+          {/* 🟢 Form input certificate */}
+          <CertificateForm />
+        </DialogContent>
+      </Dialog>
+
+      {/* table list certificate */}
+      <CertificatesTable />
       <SignupForm />
       <LogOut />
     </div>
