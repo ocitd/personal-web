@@ -3,40 +3,65 @@ import { UploadThingError } from "uploadthing/server";
 
 const f = createUploadthing();
 
-const auth = (req: Request) => ({ id: "fakeId" }); // Fake auth function
+const auth = async (req: Request) => ({ id: "fakeId" }); // ganti sesuai auth kamu nanti
 
-// FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
-  // Define as many FileRoutes as you like, each with a unique routeSlug
+  // =====================
+  // IMAGE UPLOADER
+  // =====================
   imageUploader: f({
     image: {
-      /**
-       * For full list of options and defaults, see the File Route API reference
-       * @see https://docs.uploadthing.com/file-routes#route-config
-       */
       maxFileSize: "8MB",
       maxFileCount: 1,
     },
   })
-    // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
-      // This code runs on your server before upload
       const user = await auth(req);
-
-      // If you throw, the user will not be able to upload
       if (!user) throw new UploadThingError("Unauthorized");
-
-      // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
+      console.log("✅ Image uploaded by:", metadata.userId);
+      console.log("🖼️ File URL:", file.url);
+      return { uploadedBy: metadata.userId, url: file.url };
+    }),
 
-      console.log("file url", file.ufsUrl);
+  // =====================
+  // PDF UPLOADER
+  // =====================
+  pdfUploader: f({
+    "application/pdf": {
+      maxFileSize: "16MB",
+      maxFileCount: 1,
+    },
+  })
+    .middleware(async ({ req }) => {
+      const user = await auth(req);
+      if (!user) throw new UploadThingError("Unauthorized");
+      return { userId: user.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      console.log("✅ PDF uploaded by:", metadata.userId);
+      console.log("📄 File URL:", file.url);
+      return { uploadedBy: metadata.userId, url: file.url };
+    }),
 
-      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.userId };
+  // =====================
+  // UNIVERSAL (Image or PDF)
+  // =====================
+  fileUploader: f({
+    image: { maxFileSize: "8MB", maxFileCount: 1 },
+    "application/pdf": { maxFileSize: "16MB", maxFileCount: 1 },
+  })
+    .middleware(async ({ req }) => {
+      const user = await auth(req);
+      if (!user) throw new UploadThingError("Unauthorized");
+      return { userId: user.id };
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      console.log("✅ File uploaded by:", metadata.userId);
+      console.log("🔗 File URL:", file.url);
+      return { uploadedBy: metadata.userId, url: file.url };
     }),
 } satisfies FileRouter;
 

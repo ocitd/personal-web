@@ -18,7 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
-import ImageUpload from "@/components/ui/uploadingbtn";
+import FileUpload from "@/components/ui/uploadingbtn";
 
 // 🟦 Props
 interface CertificateFormProps {
@@ -59,14 +59,12 @@ export default function CertificateForm({ certificate }: CertificateFormProps) {
         await updateCertificate(certificate.id, values);
       } else {
         await createCertificate({
-          ...values
+          ...values,
         });
       }
 
       toast.success(
-        `✅ Sertifikat berhasil ${
-          certificate ? "diperbarui" : "ditambahkan"
-        }`
+        `✅ Sertifikat berhasil ${certificate ? "diperbarui" : "ditambahkan"}`
       );
 
       if (!certificate) form.reset();
@@ -92,8 +90,11 @@ export default function CertificateForm({ certificate }: CertificateFormProps) {
               <FormItem>
                 <FormLabel>Gambar Sertifikat</FormLabel>
                 <FormControl>
-                  <ImageUpload
-                    onUploadComplete={(url) => form.setValue("certificate", url)}
+                  <FileUpload
+                    onUploadComplete={(url) =>
+                      form.setValue("certificate", url)
+                    }
+                    mode="auto" // bisa diganti "image" atau "pdf"
                   />
                 </FormControl>
                 <FormMessage />
@@ -109,7 +110,10 @@ export default function CertificateForm({ certificate }: CertificateFormProps) {
               <FormItem>
                 <FormLabel>Judul Sertifikat</FormLabel>
                 <FormControl>
-                  <Input placeholder="Contoh: Front-End Developer Expert" {...field} />
+                  <Input
+                    placeholder="Contoh: Front-End Developer Expert"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -124,7 +128,10 @@ export default function CertificateForm({ certificate }: CertificateFormProps) {
               <FormItem>
                 <FormLabel>Penyedia Sertifikat</FormLabel>
                 <FormControl>
-                  <Input placeholder="Contoh: Dicoding, Coursera, Google" {...field} />
+                  <Input
+                    placeholder="Contoh: Dicoding, Coursera, Google"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
