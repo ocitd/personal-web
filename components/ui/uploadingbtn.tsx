@@ -25,7 +25,7 @@ export default function FileUpload({ onUploadComplete, mode = "auto" }: Props) {
     <div className="space-y-3">
       {/* Upload button */}
       <UploadButton<OurFileRouter, typeof endpoint>
-        endpoint={endpoint as any}
+        endpoint={endpoint as keyof OurFileRouter}
         onClientUploadComplete={(res) => {
           if (res && res[0]?.url) {
             const url = res[0].url;
